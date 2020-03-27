@@ -51,7 +51,7 @@ public class PublishController {
         question.setGmtmodified(question.getGmtcreate());
         if (request.getSession().getAttribute("user")!=null&&title!=null&&description!=null&&tag!=null){
          User user  =   (User)request.getSession().getAttribute("user");
-         System.out.println(user.getName());
+         System.out.println(user.getUsername());
             System.out.println(description);
             System.out.println(tag);
             questionMapper.Insert(question);

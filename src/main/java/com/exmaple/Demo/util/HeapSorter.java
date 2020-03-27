@@ -1,9 +1,7 @@
 package com.exmaple.Demo.util;
 
-public class MaxHeap {
-    public void sort(int[] array) {
-        heapSort(array);
-    }
+public class HeapSorter {
+
     public static void MakeMinHeap(int a[], int n){
         for(int i=(n-1)/2 ; i>=0 ; i--){
             MinHeapFixdown(a,i,n);
@@ -48,8 +46,7 @@ public class MaxHeap {
     public static void main(String[] args) {
         int array[]={1,6,9,45,65,12,3,4,578,78,5,6,13,458,12,456,789,123};
         HeapSorter heapSorter=new HeapSorter();
-        heapSorter.heapSort(array);
-//        heapSorter.MinHeap_Sort(array,array.length);
+        heapSorter.MinHeap_Sort(array,array.length);
         for (int i:array){
             System.out.print(i+" ");
         }
@@ -57,4 +54,3 @@ public class MaxHeap {
     }
 }
 
-}

@@ -11,6 +11,21 @@ public class Question {
     private int likecount = 0;
     private String tag;
 
+    @Override
+    public String toString() {
+        return "Question{" +
+                "id=" + id +
+                ", title='" + title + '\'' +
+                ", description='" + description + '\'' +
+                ", gmtcreate=" + gmtcreate +
+                ", gmtmodified=" + gmtmodified +
+                ", commentcount=" + commentcount +
+                ", viewcount=" + viewcount +
+                ", likecount=" + likecount +
+                ", tag='" + tag + '\'' +
+                '}';
+    }
+
     public int getId() {
         return id;
     }

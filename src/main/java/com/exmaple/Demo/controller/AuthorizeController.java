@@ -49,10 +49,10 @@ public class AuthorizeController {
         GitHubUser user = gitHubProvide.getuser(accessToken);  //get方式获取个人信息
         if (user != null){
             User tempuser = new User();
-            tempuser.setAccountId(String.valueOf(user.getId()));
-            tempuser.setGmtCreate(System.currentTimeMillis());
-            tempuser.setGmtModified(tempuser.getGmtCreate());
-            tempuser.setName(user.getName());
+            tempuser.setAccountid(String.valueOf(user.getId()));
+            tempuser.setGmtcreate(System.currentTimeMillis());
+            tempuser.setGmtmodified(tempuser.getGmtcreate());
+            tempuser.setUsername(user.getName());
             String Token = UUID.randomUUID().toString();
             tempuser.setToken(Token);
             userMapper.insert(tempuser);

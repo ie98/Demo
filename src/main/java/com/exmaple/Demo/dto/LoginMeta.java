@@ -1,8 +1,13 @@
 package com.exmaple.Demo.dto;
 
-public class meta {
+public class LoginMeta {
     private String message;
-    private int status;
+    private Integer status;
+
+    public LoginMeta(String message, Integer status) {
+        this.message = message;
+        this.status = status;
+    }
 
     public String getMessage() {
         return message;
@@ -12,7 +17,7 @@ public class meta {
         this.message = message;
     }
 
-    public int getStatus() {
+    public Integer getStatus() {
         return status;
     }
 

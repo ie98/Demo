@@ -1,20 +1,27 @@
 package com.exmaple.Demo.model;
 
 public class User {
-    private  int id ;
-    private String name;
+    private int id;
+    private String accountid;
+    private String username;
     private String token;
-    private String accountId;
-    private Long gmtCreate;
-    private Long gmtModified;
-    private String avatarUrl;
+    private Long gmtcreate;
+    private Long gmtmodified;
+    private String avatarurl;
+    private String password;
 
-    public String getAvatarUrl() {
-        return avatarUrl;
-    }
-
-    public void setAvatarUrl(String avatarUrl) {
-        this.avatarUrl = avatarUrl;
+    @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", accountid='" + accountid + '\'' +
+                ", username='" + username + '\'' +
+                ", token='" + token + '\'' +
+                ", gmtcreate=" + gmtcreate +
+                ", gmtmodified=" + gmtmodified +
+                ", avatarurl='" + avatarurl + '\'' +
+                ", password='" + password + '\'' +
+                '}';
     }
 
     public int getId() {
@@ -25,12 +32,20 @@ public class User {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getAccountid() {
+        return accountid;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setAccountid(String accountid) {
+        this.accountid = accountid;
+    }
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
     }
 
     public String getToken() {
@@ -41,27 +56,35 @@ public class User {
         this.token = token;
     }
 
-    public String getAccountId() {
-        return accountId;
+    public Long getGmtcreate() {
+        return gmtcreate;
     }
 
-    public void setAccountId(String accountId) {
-        this.accountId = accountId;
+    public void setGmtcreate(Long gmtcreate) {
+        this.gmtcreate = gmtcreate;
     }
 
-    public Long getGmtCreate() {
-        return gmtCreate;
+    public Long getGmtmodified() {
+        return gmtmodified;
     }
 
-    public void setGmtCreate(Long gmtCreate) {
-        this.gmtCreate = gmtCreate;
+    public void setGmtmodified(Long gmtmodified) {
+        this.gmtmodified = gmtmodified;
     }
 
-    public Long getGmtModified() {
-        return gmtModified;
+    public String getAvatarurl() {
+        return avatarurl;
     }
 
-    public void setGmtModified(Long gmtModified) {
-        this.gmtModified = gmtModified;
+    public void setAvatarurl(String avatarurl) {
+        this.avatarurl = avatarurl;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
     }
 }

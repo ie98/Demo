@@ -1,6 +1,6 @@
 package com.exmaple.Demo.dto;
 
-public class Matrix {
+public class Point {
     private int location;
     private int distance;
     private Boolean use = true;
