@@ -9,6 +9,25 @@ public class User {
     private Long gmtmodified;
     private String avatarurl;
     private String password;
+    private String grade;
+    private String college;
+    private String phone;
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
 
     @Override
     public String toString() {
@@ -21,8 +40,20 @@ public class User {
                 ", gmtmodified=" + gmtmodified +
                 ", avatarurl='" + avatarurl + '\'' +
                 ", password='" + password + '\'' +
+                ", grade='" + grade + '\'' +
+                ", college='" + college + '\'' +
+                ", phone='" + phone + '\'' +
                 '}';
     }
+
+    public String getCollege() {
+        return college;
+    }
+
+    public void setCollege(String college) {
+        this.college = college;
+    }
+
 
     public int getId() {
         return id;

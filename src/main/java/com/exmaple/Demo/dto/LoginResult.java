@@ -1,16 +1,23 @@
 package com.exmaple.Demo.dto;
 
-import com.exmaple.Demo.constant.ResultCode;
-
 public class LoginResult {
     private String Token;
-    private LoginMeta meta;
+    private Meta meta;
+    private int userId;
 
-    public LoginMeta getMeta() {
+    public int getUserId() {
+        return userId;
+    }
+
+    public void setUserId(int userId) {
+        this.userId = userId;
+    }
+
+    public Meta getMeta() {
         return meta;
     }
 
-    public void setMeta(LoginMeta meta) {
+    public void setMeta(Meta meta) {
         this.meta = meta;
     }
 

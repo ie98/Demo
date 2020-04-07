@@ -4,4 +4,5 @@ import com.exmaple.Demo.model.User;
 
 public interface LoginService {
     public LoginResult loginCheck(User user);
+
 }

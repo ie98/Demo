@@ -17,13 +17,13 @@ public class BFSchoice {
     private Chair[][] chairs = new Chair[6][24];
 
     public List<Chair> BFS(List<DiningTable> tables, int peopleNumber) {
-        System.out.println(System.currentTimeMillis());
+//        System.out.println(System.currentTimeMillis());
         createChairs(tables);
         BFSChoiceResult[] bfsChoiceResults = bfsChoice(tables, peopleNumber);
-        System.out.println("length=" + bfsChoiceResults.length);
-        for (int i = 0; i < bfsChoiceResults.length ; i++) {
-            System.out.println("第"+i+"个选择："+bfsChoiceResults[i].getAllLength());
-        }
+//        System.out.println("length=" + bfsChoiceResults.length);
+//        for (int i = 0; i < bfsChoiceResults.length ; i++) {
+//            System.out.println("第"+i+"个选择："+bfsChoiceResults[i].getAllLength());
+//        }
         int min = bfsChoiceResults[0].getAllLength();
         int index = 0;
         for (int i = 0; i < bfsChoiceResults.length; i++) {
@@ -33,7 +33,7 @@ public class BFSchoice {
             }
 //
         }
-        System.out.println(bfsChoiceResults[index].getAllLength());
+//        System.out.println(bfsChoiceResults[index].getAllLength());
         List<Chair> chairList = new ArrayList<Chair>();
         int row = 0;
         int col = 0;
@@ -45,10 +45,10 @@ public class BFSchoice {
 
         }
 
-        for (int i = 0; i < chairList.size(); i++) {
-            System.out.println(chairList.get(i).getIntable() + "-" + chairList.get(i).getChairnumber());
-        }
-        System.out.println(System.currentTimeMillis());
+//        for (int i = 0; i < chairList.size(); i++) {
+//            System.out.println(chairList.get(i).getIntable() + "-" + chairList.get(i).getChairnumber());
+//        }
+//        System.out.println(System.currentTimeMillis());
         return chairList;
 
     }
@@ -85,15 +85,15 @@ public class BFSchoice {
         }
         int sitIndex = 0;
         toCharArray(tables);
-        for (int i = 0; i < 144; i++) {
-            for (int j = 0; j < 144; j++) {
-                System.out.printf("%5d + %4d", Points[i][j].getDistance(), Points[i][j].getLocation());
-            }
-            System.out.println();
-        }
+//        for (int i = 0; i < 144; i++) {
+//            for (int j = 0; j < 144; j++) {
+//                System.out.printf("%5d + %4d", Points[i][j].getDistance(), Points[i][j].getLocation());
+//            }
+//            System.out.println();
+//        }
         int result_index = 0;
         for (int i = 0; i < 144; i++) {
-            System.out.println("----------------------------第"+i+"个-----------------------------");
+//            System.out.println("----------------------------第"+i+"个-----------------------------");
             if (temp[i] != 0) {
                 for (int l = 0; l <peopleNumber -1 ; l++) {//重置tempInFun2
                     for (int m = 0; m < peopleNumber -1 ; m++) {
@@ -131,25 +131,25 @@ public class BFSchoice {
                     }
                     tempInFun1[recommendSit[k - 1].getSitNumber()].setDistance(0);
                     maopaoSort.mpSort(tempInFun1); //排序
-                    System.out.println("排序后:");
-                    for (int m = 0; m < 144; m++)
-                        System.out.printf("%3d", tempInFun1[m].getDistance());
+//                    System.out.println("排序后:");
+//                    for (int m = 0; m < 144; m++)
+//                        System.out.printf("%3d", tempInFun1[m].getDistance());
 //                    等待优化
                     int index = 0;
                     for (int j = 0; j < 144; j++) {//寻找最近peopleNumber-1个点的位置和总长
                         if (tempInFun1[j].getDistance() != 0) {
                             tempInFun2[k - 1][index].setDistance(tempInFun1[j].getDistance());
                             tempInFun2[k - 1][index].setSitNumber(tempInFun1[j].getLocation());
-                            System.out.print("第" + index + "个点总距离：" + tempInFun1[j].getDistance());
+//                            System.out.print("第" + index + "个点总距离：" + tempInFun1[j].getDistance());
                             index++;
                             if (index == peopleNumber - 1)
                                 break;
                         }
                     }
-                    System.out.println("");
-                    for (int m = 0; m < peopleNumber - 1; m++) {
-                        System.out.printf("%5d", tempInFun2[k - 1][m].getDistance());
-                    }
+//                    System.out.println("");
+//                    for (int m = 0; m < peopleNumber - 1; m++) {
+//                        System.out.printf("%5d", tempInFun2[k - 1][m].getDistance());
+//                    }
 
                     RecommendSit minDistance = new RecommendSit();
                     minDistance.setSitNumber(tempInFun2[k - 1][0].getSitNumber());
@@ -170,9 +170,9 @@ public class BFSchoice {
                             }
                         }
                     }
-                    System.out.println("当前选择" + tempInFun2[row][col].getSitNumber());
-                    System.out.println("当前选择" + minDistance.getSitNumber());
-                    System.out.println(row + " " + col);
+//                    System.out.println("当前选择" + tempInFun2[row][col].getSitNumber());
+//                    System.out.println("当前选择" + minDistance.getSitNumber());
+//                    System.out.println(row + " " + col);
                     tempInFun2[row][col].setUse(false);
                     recommendSit[k].setSitNumber(minDistance.getSitNumber());
                     recommendSit[k].setDistance(minDistance.getDistance());
@@ -187,12 +187,12 @@ public class BFSchoice {
                                 tempInFun2[j][n].setDistance(tempInFun2[j][n].getDistance() + Points[tempInFun2[j][n].getSitNumber()][star].getDistance());
                         }
                     }
-                    for (int a = 0; a < peopleNumber - 1; a++) {
-                        for (int j = 0; j < peopleNumber - 1; j++) {
-                            System.out.print("位置:" + tempInFun2[a][j].getSitNumber() + " " + "距离:" + tempInFun2[a][j].getDistance() + " " + "use:" + tempInFun2[a][j].getUse() + " ;");
-                        }
-                        System.out.println("");
-                    }
+//                    for (int a = 0; a < peopleNumber - 1; a++) {
+//                        for (int j = 0; j < peopleNumber - 1; j++) {
+//                            System.out.print("位置:" + tempInFun2[a][j].getSitNumber() + " " + "距离:" + tempInFun2[a][j].getDistance() + " " + "use:" + tempInFun2[a][j].getUse() + " ;");
+//                        }
+//                        System.out.println("");
+//                    }
 
                 }
                 for (int j = 1; j < peopleNumber; j++) {
@@ -205,16 +205,16 @@ public class BFSchoice {
 
         }
 
-        for (int i = 0; i < peopleNumber; i++) {
-            System.out.println(recommendSit[i].toString());
-
-        }
-        for (int i = 0; i <result.length ; i++) {
-            for (int j = 0; j < peopleNumber; j++) {
-                System.out.printf("%3d",result[i].location[j]);
-            }
-            System.out.println(result[i].getAllLength());
-        }
+//        for (int i = 0; i < peopleNumber; i++) {
+//            System.out.println(recommendSit[i].toString());
+//
+//        }
+//        for (int i = 0; i <result.length ; i++) {
+//            for (int j = 0; j < peopleNumber; j++) {
+//                System.out.printf("%3d",result[i].location[j]);
+//            }
+//            System.out.println(result[i].getAllLength());
+//        }
 
 
         return result;
@@ -235,11 +235,11 @@ public class BFSchoice {
         }
         for (int i = 0; i < 6; i++) {
             for (int j = 0; j < 24; j++) {
-                System.out.print("  " + prototype[i][j]);
+//                System.out.print("  " + prototype[i][j]);
                 temp[i * 24 + j] = prototype[i][j];
             }
 
-            System.out.println("");
+//            System.out.println("");
         }
         for (int i = 0; i < 144; i++) {
             if (temp[i] != 0) {

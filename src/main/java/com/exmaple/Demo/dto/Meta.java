@@ -1,10 +1,10 @@
 package com.exmaple.Demo.dto;
 
-public class LoginMeta {
+public class Meta {
     private String message;
     private Integer status;
 
-    public LoginMeta(String message, Integer status) {
+    public Meta(String message, Integer status) {
         this.message = message;
         this.status = status;
     }

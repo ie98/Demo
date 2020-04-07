@@ -4,6 +4,16 @@ public class PeopleNumber {
     private int peopleNumber;
     private String token;
     private String region;
+    private IdAndName[] allPeopleName;
+
+
+    public IdAndName[] getAllPeopleName() {
+        return allPeopleName;
+    }
+
+    public void setAllPeopleName(IdAndName[] allPeopleName) {
+        this.allPeopleName = allPeopleName;
+    }
 
     public String getRegion() {
         return region;
