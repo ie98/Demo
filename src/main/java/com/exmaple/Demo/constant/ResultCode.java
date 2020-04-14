@@ -8,12 +8,18 @@ SUCCESS(0, "成功"),
     ERROR(1, "失败"),
 PARAM_TO_MANY(10005, "请求参数过大"),
     TOKEN_LOSE(10006,"token失效"),
+    USER_HAS_EXISTED(20005, "用户名已存在"),
     /* 参数错误：10001-19999 */
     PARAM_IS_INVALID(10001, "参数无效"),
     PARAM_IS_BLANK(10002, "参数为空"),
     PARAM_TYPE_BIND_ERROR(10003, "参数类型错误"),
     PARAM_NOT_COMPLETE(10004, "参数缺失"),
-
+    USER_FORBIDDEN(10007, "该用户已被禁用"),
+    USER_NOT_REGISTER(10008, "账号或密码错误"),
+    USER_DELETE_SUCCESS(10009, "删除成功"),
+    USER_DELETE_ERROR(10010, "删除失败"),
+    EDIT_SUCCESS(10011, "修改成功"),
+    EDIT_ERROR(10012, "修改失败"),
 
 
     /* 用户错误：20001-29999*/
@@ -21,7 +27,6 @@ PARAM_TO_MANY(10005, "请求参数过大"),
     USER_LOGIN_ERROR(20002, "账号或密码错误"),
     USER_ACCOUNT_FORBIDDEN(20003, "账号已被禁用"),
     USER_NOT_EXIST(20004, "用户不存在"),
-    USER_HAS_EXISTED(20005, "用户名已存在"),
     USER_Register_ERROR(20006, "用户注册错误"),
 
     /* 业务错误：30001-39999 */

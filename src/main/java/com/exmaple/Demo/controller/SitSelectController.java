@@ -28,6 +28,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://30j75285x8.qicp.vip")
 public class SitSelectController {
     @Autowired
     RedisTemplate<String, Object> redisTemplate;
@@ -59,9 +60,10 @@ public class SitSelectController {
     @PostMapping("/selectConfirm")
     @ResponseBody
     public String selectConfirm(@RequestBody SelectConfirm selectConfirm) throws JsonProcessingException {
+
         Check check = new Check();
-        System.out.println(selectConfirm.getToken());
-        System.out.println(selectConfirm.getUserId());
+        System.out.println("selectConfirm"+selectConfirm.getToken());
+        System.out.println("selectConfirm"+selectConfirm.getUserId());
 //        if(check.tokenCheck(selectConfirm.getToken(),selectConfirm.getUserId()) == null)
 //            return Jackson.classtoJson(new Meta(ResultCode.getMessage("TOKEN_LOSE"),ResultCode.getCode("TOKEN_LOSE")));
         if (sitSelectServiceImpl.selectConfirm(selectConfirm))

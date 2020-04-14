@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 @Controller
 @CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://30j75285x8.qicp.vip")
 public class ClientFoodController {
     @Autowired
     FoodServiceImpl foodService;
@@ -18,6 +19,7 @@ public class ClientFoodController {
     @GetMapping("/selectAllFood")
     @ResponseBody
     public String  selectAllFood() throws JsonProcessingException {
+        System.out.println("111111");
         return Jackson.classtoJson(foodService.selectAllFood());
     }
 }

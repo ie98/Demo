@@ -1,11 +1,9 @@
 package com.exmaple.Demo.mapper;
 
 import com.exmaple.Demo.model.Record;
-import org.apache.ibatis.annotations.Insert;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Param;
-import org.apache.ibatis.annotations.Select;
+import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PathVariable;
 
 import java.util.Date;
 import java.util.List;
@@ -17,4 +15,9 @@ public interface RecordMapper {
     void insertRecord(Record record);
     @Select("select * from record")
     List<Record> selectAllRecord ();
+    @Delete("delete from record where id = #{id}")
+    Boolean deleteRecrdById(@Param("id") int id );
+    @Update("update record set remarks = #{remarks} where id = #{id}")
+    Boolean updateRecordById(@Param("id") int id ,@Param("remarks") String remarks);
+
 }

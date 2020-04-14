@@ -2,13 +2,8 @@ package com.exmaple.Demo.util;
 
 import com.exmaple.Demo.model.Chair;
 import com.exmaple.Demo.model.DiningTable;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.redis.core.RedisTemplate;
 
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.List;
-import java.util.Set;
 
 public class SelectChairUtil {
 

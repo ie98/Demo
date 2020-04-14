@@ -18,7 +18,9 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @CrossOrigin("http://localhost:9001")
+//@CrossOrigin("http://30j75285x8.qicp.vip")
 public class AdminLoginController {
+
     @Autowired
     private AdminLoginServiceImpl adminLoginService;
     @PostMapping("/adminLogin")

@@ -16,7 +16,7 @@ public class RegisterServiceImpl implements RegisterService {
         if (user.getUsername().equals(res)) {
             return false;
         } else {
-            userMapper.insertUser(user.getUsername(), user.getPassword());
+            userMapper.insertUser(user);
             return true;
         }
 

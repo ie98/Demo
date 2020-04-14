@@ -8,6 +8,34 @@ public class Admin {
     private String shopname;
     private String authority;
     private  String token;
+    private int shopid;
+    private Boolean state;
+    private String status;
+
+    public String getStatus() {
+        
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    public Boolean getState() {
+        return state;
+    }
+
+    public void setState(Boolean state) {
+        this.state = state;
+    }
+
+    public int getShopid() {
+        return shopid;
+    }
+
+    public void setShopid(int shopid) {
+        this.shopid = shopid;
+    }
 
     public String getToken() {
         return token;

@@ -15,6 +15,7 @@ import java.util.List;
 
 @Controller
 @CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://30j75285x8.qicp.vip")
 public class CartController {
     @Autowired
     CartServiceImpl cartService;
