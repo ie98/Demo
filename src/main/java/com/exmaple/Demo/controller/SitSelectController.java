@@ -26,7 +26,7 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-@Controller
+@RestController
 @CrossOrigin("http://localhost:9000")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class SitSelectController {
@@ -36,29 +36,26 @@ public class SitSelectController {
     SitSelectServiceImpl sitSelectServiceImpl;
 
     @GetMapping("/inLeft")
-    @ResponseBody
     public String inLeft() throws JsonProcessingException {
         System.out.println("aaaa");
         return Jackson.classtoJson(sitSelectServiceImpl.selectAllChair("diningtable_1"));
     }
     @GetMapping("/inRight")
-    @ResponseBody
     public String inRight() throws JsonProcessingException {
         return Jackson.classtoJson(sitSelectServiceImpl.selectAllChair("diningtable_2"));
     }
     @PostMapping("/recommendSit")
-    @ResponseBody
     public String recommendSit(@RequestBody PeopleNumber peopleNumber) throws JsonProcessingException {
         for (int i = 0; i < peopleNumber.getAllPeopleName().length; i++) {
             System.out.println(peopleNumber.getAllPeopleName()[i].getName());
         }
         return  sitSelectServiceImpl.tooMany(peopleNumber.getRegion(),peopleNumber.getPeopleNumber())?
-            Jackson.classtoJson( new TablesAndMeta(SelectChairUtil.adjust(sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2"), new BFSchoice().BFS(sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2"), peopleNumber.getPeopleNumber())),
-                    new Meta(ResultCode.getMessage("SUCCESS"),ResultCode.getCode("SUCCESS")))):
-                Jackson.classtoJson( new TablesAndMeta(null,new Meta(ResultCode.getMessage("PARAM_TO_MANY"),ResultCode.getCode("PARAM_TO_MANY"))));
+            Jackson.classtoJson( new TablesAndMeta(SelectChairUtil.adjust(sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2"),
+                    new BFSchoice().BFS(sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2"), peopleNumber.getPeopleNumber())),
+                    new Meta("SUCCESS"))):
+                Jackson.classtoJson( new TablesAndMeta(null,new Meta("PARAM_TO_MANY")));
     }
     @PostMapping("/selectConfirm")
-    @ResponseBody
     public String selectConfirm(@RequestBody SelectConfirm selectConfirm) throws JsonProcessingException {
 
         Check check = new Check();
@@ -67,8 +64,8 @@ public class SitSelectController {
 //        if(check.tokenCheck(selectConfirm.getToken(),selectConfirm.getUserId()) == null)
 //            return Jackson.classtoJson(new Meta(ResultCode.getMessage("TOKEN_LOSE"),ResultCode.getCode("TOKEN_LOSE")));
         if (sitSelectServiceImpl.selectConfirm(selectConfirm))
-            return Jackson.classtoJson(new Meta(ResultCode.getMessage("SUCCESS"),ResultCode.getCode("SUCCESS")));
-            return Jackson.classtoJson(new Meta(ResultCode.getMessage("RESULE_DATA_NONE"),ResultCode.getCode("RESULE_DATA_NONE")));
+            return Jackson.classtoJson(new Meta("SUCCESS"));
+            return Jackson.classtoJson(new Meta("RESULE_DATA_NONE"));
     }
 
 }

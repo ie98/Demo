@@ -52,6 +52,7 @@ public class User {
                 ", grade='" + grade + '\'' +
                 ", college='" + college + '\'' +
                 ", phone='" + phone + '\'' +
+                ", state=" + state +
                 '}';
     }
 

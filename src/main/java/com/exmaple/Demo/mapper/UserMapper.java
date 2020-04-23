@@ -37,7 +37,7 @@ public interface UserMapper {
     @Update("update user set state = not state where id = #{id} ")
     Boolean updateState(@Param("id") int id);
     @Select("select * from user where username = #{name}")
-    List<User> selectUserByName(@Param("name") String name);
+    User selectUserByName(@Param("name") String name);
     @Select("select * from user where username = #{username} and id <> #{id}")
     List<User> selectUserByNameAndId(@Param("username") String name , @Param("id") int id);
 

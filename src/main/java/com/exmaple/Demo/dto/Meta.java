@@ -1,12 +1,14 @@
 package com.exmaple.Demo.dto;
 
+import com.exmaple.Demo.constant.ResultCode;
+
 public class Meta {
     private String message;
     private Integer status;
 
-    public Meta(String message, Integer status) {
-        this.message = message;
-        this.status = status;
+    public Meta(String info) {
+        this.message = ResultCode.getMessage(info);
+        this.status = ResultCode.getCode(info);
     }
 
     public String getMessage() {

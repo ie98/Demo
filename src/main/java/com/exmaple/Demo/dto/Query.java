@@ -1,6 +1,9 @@
 package com.exmaple.Demo.dto;
 
-public class UserQuery {
+import lombok.Data;
+
+@Data
+public class Query {
 
     private int pageNum;
     private int pageSize;

@@ -2,16 +2,31 @@ package com.exmaple.Demo.service;
 
 import java.util.List;
 
-import com.exmaple.Demo.dto.UserQuery;
-import com.exmaple.Demo.dto.UserQueryReturn;
-import com.exmaple.Demo.model.Admin;
-import com.exmaple.Demo.model.Record;
-import com.exmaple.Demo.model.User;
+import com.exmaple.Demo.dto.Query;
+import com.exmaple.Demo.dto.QueryReturn;
+import com.exmaple.Demo.model.*;
+
 public interface InformationService {
-    public UserQueryReturn selectAllUser(UserQuery userQuery);
-    public List<Admin> selectAllAdmin();
-    public List<Record> selectAllRecord();
+    public QueryReturn selectAllUser(Query query);
+
+    public QueryReturn selectAllAdmin(Query query);
+
+    public QueryReturn selectAllRecord(Query query);
+
+    public QueryReturn selectAllShop(Query query);
+    public QueryReturn selectAllFood(Query query);
     public Boolean updateUserState(User user);
+
     public Boolean updateAdminState(Admin admin);
-    public List<User> selectUser(String query);
+    public Boolean updateShopState(Shop shop);
+
+    public Boolean updateFoodState(Food food);
+
+    public User selectUser(String query);
+    public Admin selectAdmin(String query);
+    public Shop selectShop(String query);
+    public Food selectFood(String query);
+    public List<Record> selectRecord(String query);
+
+
 }

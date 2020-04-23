@@ -9,14 +9,11 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 
-@Controller
+@RestController
 @CrossOrigin("http://localhost:9001")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class AdminLoginController {
@@ -24,7 +21,6 @@ public class AdminLoginController {
     @Autowired
     private AdminLoginServiceImpl adminLoginService;
     @PostMapping("/adminLogin")
-    @ResponseBody
     public String adminLogin(@RequestBody Admin admin ) throws JsonProcessingException {
         return new ObjectMapper().writeValueAsString(adminLoginService.loginCheck(admin));
     }

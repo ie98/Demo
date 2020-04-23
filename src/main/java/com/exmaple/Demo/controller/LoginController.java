@@ -17,7 +17,7 @@ import javax.servlet.http.Cookie;
 import javax.servlet.http.HttpServletRequest;
 import java.util.Map;
 
-@Controller
+@RestController
 @CrossOrigin("http://localhost:9000")
 
 //@CrossOrigin("http://30j75285x8.qicp.vip")
@@ -26,11 +26,11 @@ public class LoginController {
     @Autowired
     private LoginServiceImpl loginServiceImple;
     @PostMapping("/login")
-    @ResponseBody
     public String login(HttpServletRequest request, @RequestBody  User user1 ) throws JsonProcessingException {
         System.out.println("123456789");
         return new ObjectMapper().writeValueAsString(loginServiceImple.loginCheck(user1));
 
     }
+
 
 }

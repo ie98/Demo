@@ -24,8 +24,10 @@ public interface AdminMapper {
     List<Admin> selectAdminByNameAndId(@Param("username") String username , @Param("id") int id);
     @Update("update administrator set username = #{username} , authority = #{authority} , shopname = #{shopname},password = #{password},phone = #{phone} where  id = #{id}")
     Boolean editAdmin(Admin admin);
-    @Insert("insert into administrator (username,authority,shopname,password,phone,) values(#{username},#{authority},#{shopname},#{password},#{phone})")
-    Boolean insertAdmin(Admin admin);
+    @Insert("insert into administrator (username,authority,shopname,password,phone,status,shopid) values(#{username},#{authority},#{shopname},#{password},#{phone},#{status},#{shopid})")
+    Boolean addAdmin(Admin admin);
     @Update("update administrator set state = not state where id = #{id} ")
     Boolean updateState(@Param("id") int id);
+    @Select("select authority from administrator where id = #{id}")
+    int getAuthorityById(@Param("id") int id);
 }

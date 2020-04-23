@@ -8,8 +8,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.RestController;
 
-@Controller
+@RestController
 @CrossOrigin("http://localhost:9000")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class ClientFoodController {
@@ -17,7 +18,6 @@ public class ClientFoodController {
     FoodServiceImpl foodService;
 
     @GetMapping("/selectAllFood")
-    @ResponseBody
     public String  selectAllFood() throws JsonProcessingException {
         System.out.println("111111");
         return Jackson.classtoJson(foodService.selectAllFood());

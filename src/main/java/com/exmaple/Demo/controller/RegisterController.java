@@ -9,12 +9,9 @@ import com.exmaple.Demo.util.Jackson;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
+@RestController
 @CrossOrigin(origins = {"http://localhost:9000","http://localhost:9001"})
 
 //@CrossOrigin("http://30j75285x8.qicp.vip")
@@ -22,16 +19,15 @@ public class RegisterController {
         @Autowired
         private RegisterServiceImpl registerService;
         @PostMapping("/register")
-        @ResponseBody
     public  String register(@RequestBody RegisterUser user) throws JsonProcessingException {
             System.out.println("reigister");
             System.out.println(user.getUsername());
             Boolean bool = registerService.insertUser(user);
             if (bool){
-                return Jackson.classtoJson(new Meta(ResultCode.getMessage("SUCCESS"),ResultCode.getCode("SUCCESS")));
+                return Jackson.classtoJson(new Meta("SUCCESS"));
 
             }else{
-                return Jackson.classtoJson(new Meta(ResultCode.getMessage("USER_HAS_EXISTED"),ResultCode.getCode("USER_HAS_EXISTED")));
+                return Jackson.classtoJson(new Meta("USER_HAS_EXISTED"));
 
             }
         }

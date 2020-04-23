@@ -1,11 +1,10 @@
 package com.exmaple.Demo.mapper;
 
+import com.exmaple.Demo.dto.RemarksAndId;
 import com.exmaple.Demo.model.Record;
+
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PathVariable;
-
-import java.util.Date;
 import java.util.List;
 
 @Mapper
@@ -19,5 +18,8 @@ public interface RecordMapper {
     Boolean deleteRecrdById(@Param("id") int id );
     @Update("update record set remarks = #{remarks} where id = #{id}")
     Boolean updateRecordById(@Param("id") int id ,@Param("remarks") String remarks);
-
+    @Select("select * from record where username = #{username}")
+    List<Record> selectRecordByName(@Param("username") String username);
+    @Update("update record set remarks = #{remarks} where id = #{id}")
+    Boolean editRemarks(RemarksAndId remarks);
 }

@@ -1,5 +1,7 @@
 package com.exmaple.Demo.model;
 
+import java.util.List;
+
 public class Admin {
     private int id;
     private String username;
@@ -11,6 +13,15 @@ public class Admin {
     private int shopid;
     private Boolean state;
     private String status;
+    private List<Authority> authoritys;
+
+    public List<Authority> getAuthoritys() {
+        return authoritys;
+    }
+
+    public void setAuthoritys(List<Authority> authoritys) {
+        this.authoritys = authoritys;
+    }
 
     public String getStatus() {
         
