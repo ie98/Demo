@@ -25,17 +25,17 @@ public class LoginServiceImpl implements LoginService {
     public LoginResult loginCheck(User user){
         LoginResult loginToken = new LoginResult();
         //--------------------------------shiro认证
-        System.out.println("12345");
-        Subject subject = SecurityUtils.getSubject();
-        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
-        try {
-            loginToken.setMeta(new Meta("SUCCESS"));
-            subject.login(token);
-        }catch (UnknownAccountException e){   //用户名不存在
-            System.out.println("用户名不存在");
-            loginToken.setMeta(new Meta("USER_NOT_REGISTER"));
-            return loginToken;
-        }
+//        System.out.println("12345");
+//        Subject subject = SecurityUtils.getSubject();
+//        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
+//        try {
+//            loginToken.setMeta(new Meta("SUCCESS"));
+//            subject.login(token);
+//        }catch (UnknownAccountException e){   //用户名不存在
+//            System.out.println("用户名不存在");
+//            loginToken.setMeta(new Meta("USER_NOT_REGISTER"));
+//            return loginToken;
+//        }
 
         //--------------------------------个人认证
 
@@ -45,6 +45,7 @@ public class LoginServiceImpl implements LoginService {
             if(res.getState()){
                 loginToken.setToken(UUID.randomUUID().toString());
                 res.setToken(loginToken.getToken());
+                loginToken.setUsername(res.getUsername());
                 System.out.println(ResultCode.getMessage("SUCCESS"));
                 userMapper.SetUserToken(loginToken.getToken(), res.getUsername());
                 loginToken.setMeta(new Meta("SUCCESS"));

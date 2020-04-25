@@ -2,6 +2,8 @@ package com.exmaple.Demo.service;
 
 import com.exmaple.Demo.dto.Cart;
 import com.exmaple.Demo.dto.CartItem;
+import com.exmaple.Demo.dto.Meta;
+import com.exmaple.Demo.dto.deleteCartItem;
 import com.exmaple.Demo.model.RedisCart;
 import com.exmaple.Demo.util.Jackson;
 import com.exmaple.Demo.util.RedisUtil;
@@ -14,6 +16,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
 @Service
@@ -52,5 +55,24 @@ public class CartServiceImpl implements CartService {
         String str1 = Jackson.classtoJson(temp);
         System.out.println(str1);
         return temp;
+    }
+    public Meta deleteCartItem(deleteCartItem cartItem , int id){
+        try {
+            RedisUtil redisUtil = new RedisUtil(redisTemplate);
+            RedisCart redisCart = (RedisCart) redisUtil.get("Cart_"+id);
+            Iterator<CartItem> it =redisCart.getCart().iterator();
+            while (it.hasNext()){
+                CartItem cartItem1 = it.next();
+                if (cartItem.getDate().getTime() ==  cartItem1.getDate().getTime()){
+                    it.remove();
+                }
+            }
+            redisUtil.set("Cart_"+id,redisCart);
+            return new Meta("SUCCESS");
+        }catch (Exception e){
+            return new Meta("ERROR");
+        }
+
+
     }
 }

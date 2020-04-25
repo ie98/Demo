@@ -3,6 +3,7 @@ package com.exmaple.Demo.controller;
 import com.exmaple.Demo.dto.Cart;
 import com.exmaple.Demo.dto.CartItem;
 import com.exmaple.Demo.dto.UserId;
+import com.exmaple.Demo.dto.deleteCartItem;
 import com.exmaple.Demo.model.RedisCart;
 import com.exmaple.Demo.service.CartServiceImpl;
 import com.exmaple.Demo.util.Jackson;
@@ -33,4 +34,12 @@ public class CartController {
     System.out.println(str);
         return str;
     }
+    @DeleteMapping("/deleteCartItem/{id}")
+    public String deleteCartItem(@PathVariable("id") int id,@RequestBody deleteCartItem item) throws JsonProcessingException {
+
+        String str = Jackson.classtoJson(cartService.deleteCartItem(item,id));
+
+        return str;
+    }
+
 }

@@ -5,6 +5,7 @@ import com.exmaple.Demo.model.Food;
 import com.exmaple.Demo.model.Shop;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
 
@@ -29,4 +30,6 @@ public interface FoodMapper {
     Boolean updateForbid(@Param("id") int id);
     @Update("update food set  img = #{img} where foodname = #{foodname} ")
     Boolean updateImg(@Param("foodname") String foodname , @Param("img") String img);
+    @Select("select * from food where shopname = #{shopname}")
+    List<Food> showTheShopFood(@Param("shopname") String shopname);
 }

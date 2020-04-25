@@ -10,13 +10,13 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@CrossOrigin("http://localhost:9001")
+@CrossOrigin(origins = {"http://localhost:9001","http://localhost:9000"})
 public class ShopController {
     @Autowired
     private ShopServiceImpl shopService;
     @GetMapping("/getAllShop")
     public String getAllShop() throws JsonProcessingException {
-        return Jackson.classtoJson(shopService.selectAllShop());
+        return Jackson.classtoJson(shopService. selectAllShop());
     }
 
 }

@@ -2,6 +2,10 @@ package com.exmaple.Demo.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 @Data
 public class FoodRecord {
     private String out_trade_no;
@@ -10,4 +14,11 @@ public class FoodRecord {
     private String body;
     private String timeout_express;
     private String product_code;
+    private String username;
+    private Date date;
+    private String remarks;
+    private Integer star;
+    private String labels;
+    private Integer userid;
+    private List<Long> dates = new ArrayList<>();
 }

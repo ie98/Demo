@@ -12,4 +12,6 @@ public class Shop {
     private String notice;
     private String principal;
     private String phone;
+    private Integer sales;
+    private String logo;
 }

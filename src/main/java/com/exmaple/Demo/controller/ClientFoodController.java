@@ -22,4 +22,9 @@ public class ClientFoodController {
         System.out.println("111111");
         return Jackson.classtoJson(foodService.selectAllFood());
     }
+    @GetMapping("/showTheShopFood")
+    public String  showTheShopFood(String shopname) throws JsonProcessingException {
+        System.out.println("111111");
+        return Jackson.classtoJson(foodService.showTheShopFood(shopname));
+    }
 }

@@ -19,7 +19,7 @@ import java.util.Map;
 
 @RestController
 @CrossOrigin("http://localhost:9000")
-
+//
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class LoginController {
 
