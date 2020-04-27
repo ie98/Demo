@@ -24,6 +24,8 @@ PARAM_TO_MANY(10005, "请求参数过大"),
     USER_DELETE_ERROR(10010, "删除失败"),
     EDIT_SUCCESS(10011, "修改成功"),
     EDIT_ERROR(10012, "修改失败"),
+    NO_P_LABEL(10013, "没有找到父级标签"),
+    TAGNAME_ISEXIT(10014, "标签名已经存在"),
 
 
     /* 用户错误：20001-29999*/

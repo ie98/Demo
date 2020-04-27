@@ -80,7 +80,10 @@ public class InformationController {
     public String selectShop(String query) throws JsonProcessingException {
         return Jackson.classtoJson(informationService.selectShop(query));
     }
-
+    @PostMapping("selectAllFoodNotQuery")
+    public String selectAllFoodNotQuery() throws JsonProcessingException {
+       return Jackson.classtoJson(informationService.selectAllFoodNotQuery()) ;
+    }
 
 
 

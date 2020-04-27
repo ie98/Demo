@@ -24,7 +24,7 @@ public interface FoodMapper {
     Boolean deleteFood(@Param("id") int id);
     @Insert("insert into food (id,foodid,foodname,price,shopname,img) values (#{id},#{foodid},#{foodname},#{price},#{shopname},#{img})")
     Boolean insertFood(Food food);
-    @Update("update food set foodname = #{foodname} , price = #{price} ,shopname = #{shopname} where id = #{id} ")
+    @Update("update food set foodname = #{foodname} , price = #{price} ,shopname = #{shopname} , tags = #{tags}where id = #{id} ")
     Boolean updateFood(Food food);
     @Update("update food set  forbid = not forbid where id = #{id} ")
     Boolean updateForbid(@Param("id") int id);

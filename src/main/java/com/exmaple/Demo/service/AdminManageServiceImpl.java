@@ -185,8 +185,9 @@ public class AdminManageServiceImpl implements  AdminManageService {
 
     @Override
     public Meta editRole(Role role) {
-        if (roleMapper.selectRoleByNameAndId(role.getName(),role.getId()) != null)
+        if (roleMapper.selectRoleByNameAndId(role.getName(),role.getId()).size() !=0){
             return new Meta("ROLE_HAS_EXISTED");
+        }
         return Result.ResuleInfo(roleMapper.UpdateInfo(role.getName(),role.getDetail(),role.getId()),"SUCCESS","ERROR");
     }
 }

@@ -15,6 +15,7 @@ public interface InformationService {
 
     public QueryReturn selectAllShop(Query query);
     public QueryReturn selectAllFood(Query query);
+    public List<Food> selectAllFoodNotQuery();
     public Boolean updateUserState(User user);
 
     public Boolean updateAdminState(Admin admin);

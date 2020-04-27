@@ -31,7 +31,7 @@ public interface RoleMapper {
     Boolean insertRole(@Param("name") String name , @Param("detail") String detail);
     @Select("select * from role where name = #{name}")
     Role selectRoleByName(@Param("name") String name);
-    @Select("select * from user where name = #{name} and id <> #{id}")
+    @Select("select * from role where name = #{name} and id <> #{id}")
     List<Role> selectRoleByNameAndId(@Param("name") String name , @Param("id") int id);
 
 }

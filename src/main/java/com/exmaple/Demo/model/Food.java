@@ -2,6 +2,9 @@ package com.exmaple.Demo.model;
 
 import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Data
 public class Food {
     private int id;
@@ -10,8 +13,10 @@ public class Food {
     private double price;
     private int shopid;
     private String shopname;
-    private String laber;
+    private String tags;
     private String img;
     private boolean forbid;
+    private List<List<Integer>> tagList = new ArrayList<>();
+    private List<Tag> tagDetail = new ArrayList<>();
 
 }

@@ -1,5 +1,7 @@
 package com.exmaple.Demo.service;
 
+import com.alipay.api.request.AftAifinNewtestQueryRequest;
+import com.exmaple.Demo.dto.Meta;
 import com.exmaple.Demo.dto.Query;
 import com.exmaple.Demo.dto.QueryReturn;
 
@@ -11,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -25,12 +28,14 @@ public class InformationServiceImpl<T> implements InformationService {
     private FoodMapper foodMapper;
     @Autowired
     private ShopMapper shopMapper;
+    @Autowired
+    private TagMapper tagMapper;
     private Utils utils = new Utils();
     @Override
     public QueryReturn selectAllUser(Query query) {
         System.out.println(query.getPageSize());
         List<User> list = userMapper.selectAllUser();
-        return utils.selectUtil((List<T>) list,query);
+        return utils.selectUtil(list,query);
     }
 
     @Override
@@ -38,25 +43,64 @@ public class InformationServiceImpl<T> implements InformationService {
         System.out.println(query.getPageSize());
         List<Admin> list = adminMapper.selectAllAdmin();
 
-        return utils.selectUtil((List<T>) list,query);
+        return utils.selectUtil(list,query);
     }
 
     @Override
     public QueryReturn selectAllRecord(Query query) {
         List<Record> list = recordMapper.selectAllRecord();
-        return utils.selectUtil((List<T>) list,query);
+        return utils.selectUtil(list,query);
     }
 
     @Override
     public QueryReturn selectAllShop(Query query) {
         List<Shop> list = shopMapper.selectAllShop();
-        return utils.selectUtil((List<T>) list,query);
+        return utils.selectUtil(list,query);
     }
 
     @Override
     public QueryReturn selectAllFood(Query query) {
-        List<Food> list = foodMapper.selectAllFood();
-        return utils.selectUtil((List<T>) list,query);
+        List<Food> foods = foodMapper.selectAllFood();
+        List<Tag> tags = tagMapper.selectAllTag();
+        if (foods == null){
+            QueryReturn queryReturn = new QueryReturn();
+            queryReturn.setMeta(new Meta("ERROR"));
+            return queryReturn;
+        }
+        for (int i = 0; i < foods.size(); i++) {
+            System.out.println(foods.get(i).getTags());
+            if (foods.get(i).getTags() == null ||  "".equals(foods.get(i).getTags())) {
+            }else {
+                String[] str  = foods.get(i).getTags().split("/");
+                List<List<Integer>> list = new ArrayList<>();
+                for (int i1 = 0; i1 < str.length; i1++) {
+                    String[] arr = str[i1].split(",");
+                    List<Integer> temp = new ArrayList<>();
+                    for (int i2 = 0; i2 < arr.length; i2++) {
+                        temp.add(Integer.parseInt(arr[i2]));
+                    }
+                    list.add(temp);
+                }
+                foods.get(i).setTagList(list);
+            }
+        }
+        QueryReturn queryReturn = utils.selectUtil(foods,query);
+        Object tempFoods = queryReturn.getList(); // 先转Object再转List<Food> List<A>无法直接强制转换成List<B>
+        List<Food> needFoods = (List<Food>)tempFoods;
+        for (int i = 0; i < needFoods.size(); i++) {
+            for (List<Integer> taglist : needFoods.get(i).getTagList()) {
+                for (int i1 = 0; i1 < tags.size(); i1++) {
+                    if (tags.get(i1).getId() == taglist.get(taglist.size()-1)){
+                        needFoods.get(i).getTagDetail().add(tags.get(i1));
+                        break;
+                    }
+                }
+            }
+        }
+        Object object = needFoods;
+        List<Object> list = (List<Object>) object;
+        queryReturn.setList(list);
+        return queryReturn;
     }
 
     @Override
@@ -110,6 +154,25 @@ public class InformationServiceImpl<T> implements InformationService {
         return food == null ?null:food;
     }
 
+    @Override
+    public List<Food> selectAllFoodNotQuery() {
+        List<Food> foods = foodMapper.selectAllFood();
 
-
+        for (int i = 0; i < foods.size(); i++) {
+            if (foods.get(i).getTags() !=null || ! "".equals(foods.get(i).getTags())){
+                String[] str  = foods.get(i).getTags().split("/");
+                List<List<Integer>> list = new ArrayList<>();
+                for (int i1 = 0; i1 < str.length; i1++) {
+                    String[] arr = str[i1].split(",");
+                    List<Integer> temp = new ArrayList<>();
+                    for (int i2 = 0; i2 < arr.length; i2++) {
+                        temp.add(Integer.parseInt(arr[i2]));
+                    }
+                    list.add(temp);
+                }
+                foods.get(i).setTagList(list);
+            }
+        }
+        return foods;
+    }
 }
