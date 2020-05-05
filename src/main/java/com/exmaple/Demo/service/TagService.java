@@ -1,6 +1,7 @@
 package com.exmaple.Demo.service;
 
 import com.exmaple.Demo.dto.*;
+import com.exmaple.Demo.model.Food;
 import com.exmaple.Demo.model.Tag;
 
 import java.util.List;

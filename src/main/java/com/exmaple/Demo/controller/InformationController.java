@@ -40,6 +40,7 @@ public class InformationController {
     public String selectAllFood(@RequestBody Query query) throws JsonProcessingException {
         return Jackson.classtoJson(informationService.selectAllFood(query));
     }
+
     @PutMapping("/updateUserState")
     public String updateUserState(@RequestBody User user) throws JsonProcessingException {
         System.out.println(user.toString());

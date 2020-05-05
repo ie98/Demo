@@ -5,8 +5,9 @@ import com.exmaple.Demo.model.Food;
 
 import java.util.List;
 
-public interface FoodService {
+public interface ClientFoodService {
     public List<Food> selectAllFood();
     public FoodsAndMeta showTheShopFood(String shopname);
+    public List<Food>  selectTagFood(List<List<Integer>> list);
 
 }

@@ -138,22 +138,27 @@ public class AdminManageServiceImpl implements  AdminManageService {
     }
 
     @Override
-    public void uploadImg(MultipartFile file, String foodname) throws IOException {
+    public void uploadImg(MultipartFile file, String foodname ,String shopname) throws IOException {
         System.out.println(foodname);
-        File folder = new File("D:/vueProject/vue_proj_01/src/assets/imgs/");
+        System.out.println(shopname);
+        File folder = new File("D:\\convenientCT\\imgs\\" + shopname);
 //        if (countFileNumber(folder) > MAX_IMAGE_NUM) {
 //            return MAX_IMAGE_NUM;
 //        }
         System.out.println(file.getContentType());
         System.out.println(file.getOriginalFilename());
-        String last = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
-        System.out.println(last);
+        System.out.println(folder.getAbsolutePath());
+
+        String last ;
+
         if (!file.isEmpty()) {
+            last = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf(".")+1);
+
             String fileName = foodname + "."+ last;
             InputStream is = file.getInputStream();
 
             if (!folder.exists()) {
-                folder.mkdir();
+                folder.mkdirs();
             }
 
             File uploadFile = new File(folder.getAbsolutePath() + File.separator + fileName);

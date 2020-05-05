@@ -27,16 +27,16 @@ public class AdminLoginServiceImpl implements AdminLoginService {
         AdminLoginResult adminLoginResult = new AdminLoginResult();
         //---------------------------shiro处理登录验证
 
-//        Subject subject = SecurityUtils.getSubject();
-//
-//        UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(),admin.getPassword());
-//        try {
-//            subject.login(token);
-//        }catch (UnknownAccountException e){   //用户名不存在
-//            System.out.println("用户名不存在");
-//            adminLoginResult.setMeta(new Meta("ERROR"));
-//            return adminLoginResult;
-//        }
+        Subject subject = SecurityUtils.getSubject();
+
+        UsernamePasswordToken token = new UsernamePasswordToken(admin.getUsername(),admin.getPassword());
+        try {
+            subject.login(token);
+        }catch (UnknownAccountException e){   //用户名不存在
+            System.out.println("用户名不存在");
+            adminLoginResult.setMeta(new Meta("ERROR"));
+            return adminLoginResult;
+        }
         //---------------------------个人处理登录验证
         Admin res =  adminMapper.check(admin.getUsername(),admin.getPassword());
 //        Subject subject = SecurityUtils.getSubject();

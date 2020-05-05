@@ -11,7 +11,9 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @CrossOrigin(origins = {"http://localhost:9001","http://localhost:9000"})
-public class ShopController {
+public class
+
+ShopController {
     @Autowired
     private ShopServiceImpl shopService;
     @GetMapping("/getAllShop")

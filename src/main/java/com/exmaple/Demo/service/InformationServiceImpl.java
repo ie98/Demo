@@ -35,7 +35,7 @@ public class InformationServiceImpl<T> implements InformationService {
     public QueryReturn selectAllUser(Query query) {
         System.out.println(query.getPageSize());
         List<User> list = userMapper.selectAllUser();
-        return utils.selectUtil(list,query);
+            return utils.selectUtil(list,query);
     }
 
     @Override

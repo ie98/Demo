@@ -27,6 +27,8 @@ public class CartController {
 
         return null;
     }
+
+
     @PostMapping("/getCart")
     public String getCart(@RequestBody UserId userId) throws JsonProcessingException {
     System.out.println(userId.getId());
@@ -34,7 +36,7 @@ public class CartController {
     System.out.println(str);
         return str;
     }
-    @DeleteMapping("/deleteCartItem/{id}")
+    @PostMapping("/deleteCartItem/{id}")
     public String deleteCartItem(@PathVariable("id") int id,@RequestBody deleteCartItem item) throws JsonProcessingException {
 
         String str = Jackson.classtoJson(cartService.deleteCartItem(item,id));

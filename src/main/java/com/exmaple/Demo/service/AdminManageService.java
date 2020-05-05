@@ -22,7 +22,7 @@ public interface AdminManageService {
     public Meta addAdmin(Admin admin);
     public Meta addShop(Shop shop );
     public Meta addFood(Food food );
-    public void uploadImg(MultipartFile file ,String foodname) throws IOException;
+    public void uploadImg(MultipartFile file ,String foodname ,String shopname) throws IOException;
     public Meta deleteRole(int id);
     public Meta addRole(Role role );
     public Meta editRole(Role role);

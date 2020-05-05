@@ -8,11 +8,11 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.awt.*;
-import java.lang.invoke.LambdaConversionException;
+import java.util.List;
+
 
 @RestController
-@CrossOrigin("http://localhost:9001")
+@CrossOrigin("*")
 public class TagController {
         @Autowired
         private TagServiceImpl labelService;
@@ -33,5 +33,11 @@ public class TagController {
         public String selectAllTagNotQuery() throws JsonProcessingException {
                 return Jackson.classtoJson(labelService.selectAllTagNotQuery());
         }
+        @PostMapping("/selectAllTagNotQueryClient")//无需权限
+        public String selectAllTagNotQueryClient() throws JsonProcessingException {
+                return Jackson.classtoJson(labelService.selectAllTagNotQuery());
+        }
+
+
 
 }

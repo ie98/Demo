@@ -8,7 +8,7 @@ public class Admin {
     private String phone;
     private String password;
     private String shopname;
-    private String authority;
+    private int authority;
     private  String token;
     private int shopid;
     private Boolean state;
@@ -96,11 +96,11 @@ public class Admin {
         this.shopname = shopname;
     }
 
-    public String getAuthority() {
+    public int getAuthority() {
         return authority;
     }
 
-    public void setAuthority(String authority) {
+    public void setAuthority(int authority) {
         this.authority = authority;
     }
 }

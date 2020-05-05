@@ -35,6 +35,8 @@ public class AlipayServiceImpl implements AlipayService {
         if (foodRecord == null){
             return Jackson.classtoJson(new Meta("ERROR"));
         }
+        foodRecord.setDate(new Date());
+        System.out.println(foodRecord.getDate());
         Boolean bool =  foodRecordMapper.insertFoodRecord(foodRecord);  // 存入数据库
         if (!bool){
             return Jackson.classtoJson(new Meta("ERROR"));
@@ -103,6 +105,6 @@ public class AlipayServiceImpl implements AlipayService {
 
 //        alipayConfig.logResult(alipayClient.pageExecute(request).);
         System.out.println(from);
-            return "from";
+            return from;
     }
 }

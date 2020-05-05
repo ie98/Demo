@@ -5,6 +5,7 @@ import com.exmaple.Demo.dto.Meta;
 import com.exmaple.Demo.dto.LoginResult;
 import com.exmaple.Demo.mapper.UserMapper;
 
+import com.exmaple.Demo.util.Result;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -27,6 +28,7 @@ public class LoginServiceImpl implements LoginService {
         //--------------------------------shiro认证
 //        System.out.println("12345");
 //        Subject subject = SecurityUtils.getSubject();
+////        subject.isPermitted("101");
 //        UsernamePasswordToken token = new UsernamePasswordToken(user.getUsername(),user.getPassword());
 //        try {
 //            loginToken.setMeta(new Meta("SUCCESS"));
@@ -61,5 +63,7 @@ public class LoginServiceImpl implements LoginService {
 
       return loginToken;
     }
+
+
 
 }

@@ -2,6 +2,7 @@ package com.exmaple.Demo.service;
 
 import com.exmaple.Demo.dto.*;
 import com.exmaple.Demo.mapper.TagMapper;
+import com.exmaple.Demo.model.Food;
 import com.exmaple.Demo.model.Tag;
 import com.exmaple.Demo.util.Result;
 import com.exmaple.Demo.util.Utils;
@@ -30,8 +31,8 @@ public class TagServiceImpl implements TagService {
     public QueryReturn getTagTree(Query query) {
 
         TagAndChild root = createTree();
-        Utils utils = new Utils();
-        QueryReturn queryReturn =  utils.selectUtil(root.getChildren(),query);
+
+        QueryReturn queryReturn =  Utils.selectUtil(root.getChildren(),query);
        return   queryReturn;
     }
 
@@ -71,6 +72,8 @@ public class TagServiceImpl implements TagService {
         TagAndChild root = createTree();
         return root.getChildren();
     }
+
+
 
     private TagAndChild createTree(){
         List<Tag> list = tagMapper.selectAllTag();
@@ -130,7 +133,7 @@ public class TagServiceImpl implements TagService {
         int i1;
 
             if (tag.getPid() == tagAndChild.getId()){
-                System.out.println(tag.getTagname() + "是" + tagAndChild.getTagname() + "的子标签");
+//                System.out.println(tag.getTagname() + "是" + tagAndChild.getTagname() + "的子标签");
                 TagAndChild tagAndChild1 = new TagAndChild();
                 BeanUtils.copyProperties(tag, tagAndChild1);
                 tagAndChild.getChildren().add(tagAndChild1);

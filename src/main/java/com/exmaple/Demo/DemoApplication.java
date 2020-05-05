@@ -8,9 +8,7 @@ import org.springframework.boot.web.servlet.ServletComponentScan;
 @SpringBootApplication
 
 public class DemoApplication {   //项目启动类
-
     public static void main(String[] args) {
         SpringApplication.run(DemoApplication.class, args);
     }
-
 }

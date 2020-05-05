@@ -14,6 +14,7 @@ import com.exmaple.Demo.util.*;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.mysql.cj.xdevapi.SelectStatementImpl;
 import org.apache.ibatis.annotations.Select;
+import org.apache.shiro.authz.annotation.RequiresPermissions;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.redis.core.RedisTemplate;
 import org.springframework.data.redis.serializer.RedisSerializer;
@@ -22,6 +23,7 @@ import org.springframework.data.redis.serializer.StringRedisSerializer;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
+import javax.security.auth.Subject;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -36,6 +38,7 @@ public class SitSelectController {
     SitSelectServiceImpl sitSelectServiceImpl;
 
     @GetMapping("/inLeft")
+    @RequiresPermissions({"101"})
     public String inLeft() throws JsonProcessingException {
         System.out.println("aaaa");
         return Jackson.classtoJson(sitSelectServiceImpl.selectAllChair("diningtable_1"));

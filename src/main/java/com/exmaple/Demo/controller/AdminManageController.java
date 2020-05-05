@@ -89,8 +89,8 @@ public class AdminManageController {
     }
     //上传图片
     @RequestMapping("/uploadImg")
-    public void  uploadImg(@RequestParam(value = "file") MultipartFile file , @RequestParam("foodname") String foodname) throws IOException {
-        adminManageService.uploadImg(file , foodname);
+    public void  uploadImg(@RequestParam(value = "file") MultipartFile file , @RequestParam("foodname") String foodname ,@RequestParam("shopname") String shopname) throws IOException {
+        adminManageService.uploadImg(file , foodname ,shopname);
         }
 
     //========================Role=============
@@ -108,5 +108,11 @@ public class AdminManageController {
         return Jackson.classtoJson(adminManageService.addRole(role));
     }
 
+    @RequestMapping("/naouth")
+//    @ResponseBody
+    public String naouth(){
+        System.out.println("naouth");
+        return "noAuto.html";
+    }
 
 }

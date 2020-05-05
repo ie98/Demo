@@ -1,4 +1,5 @@
 package com.exmaple.Demo.util;
+
 import com.exmaple.Demo.dto.BFSChoiceResult;
 import com.exmaple.Demo.dto.Point;
 import com.exmaple.Demo.dto.RecommendSit;
@@ -10,19 +11,21 @@ import java.util.List;
 
 public class BFSchoice {
 
-    private Point[][] Points = new Point[144][144];
-    private int[][] prototype = new int[6][24];
-    private int[] temp = new int[144];
+    private Point[][] Points = new Point[144][144];  //最短距离矩阵
+    private int[][] prototype = new int[6][24];  //桌椅对应二维数组 可以不要
+    private int[] temp = new int[144];  //桌椅对应一维数组 用来生成Points ，计算最短距离
     private Chair[][] chairs = new Chair[6][24];
 
     public List<Chair> BFS(List<DiningTable> tables, int peopleNumber) {
 //        System.out.println(System.currentTimeMillis());
-        createChairs(tables);
+        createChairs(tables);//创建映射表，存储椅子的位置信息（第几张桌子的第几块椅子）
         BFSChoiceResult[] bfsChoiceResults = bfsChoice(tables, peopleNumber);
 //        System.out.println("length=" + bfsChoiceResults.length);
-//        for (int i = 0; i < bfsChoiceResults.length ; i++) {
-//            System.out.println("第"+i+"个选择："+bfsChoiceResults[i].getAllLength());
-//        }
+        System.out.println("bfsChoiceResults的长度:"+bfsChoiceResults.length);
+        for (int i = 0; i < bfsChoiceResults.length; i++) {
+            System.out.println("第"+ i +"个的总长为："+bfsChoiceResults[i].getAllLength());
+
+        }
         int min = bfsChoiceResults[0].getAllLength();
         int index = 0;
         for (int i = 0; i < bfsChoiceResults.length; i++) {
@@ -32,6 +35,11 @@ public class BFSchoice {
             }
 //
         }
+
+            for (int i2 = 0; i2 < bfsChoiceResults[index].getLocation().length; i2++) {
+                System.out.print("座位是：" + ((bfsChoiceResults[index].getLocation()[i2] / 24) + 1) + "-" + ((bfsChoiceResults[index].getLocation()[i2] % 24) + 1));
+            }
+
 //        System.out.println(bfsChoiceResults[index].getAllLength());
         List<Chair> chairList = new ArrayList<Chair>();
         int row = 0;
@@ -64,12 +72,12 @@ public class BFSchoice {
     public BFSChoiceResult[] bfsChoice(List<DiningTable> tables, int peopleNumber) {
         this.createMatrix();
         RecommendSit[] recommendSit = new RecommendSit[peopleNumber];//存放单次推荐位置
-        for (int i = 0; i < peopleNumber; i++) {
+        for (int i = 0; i < peopleNumber; i++) { //初始化recommendSit
             recommendSit[i] = new RecommendSit();
         }
 //        recommendSit[0].setSitNumber(5);
 //        System.out.println(recommendSit[0].getSitNumber());
-        BFSChoiceResult[] result = new BFSChoiceResult[144]; //存放总推荐位置
+        BFSChoiceResult[] result = new BFSChoiceResult[144]; //存放总推荐位置 ， 144 表示可满足一次性挑选144个位置
         Point[] tempInFun1 = new Point[144];
         for (int i = 0; i < 144; i++) {
             tempInFun1[i] = new Point();
@@ -91,18 +99,18 @@ public class BFSchoice {
 //            System.out.println();
 //        }
         int result_index = 0;
-        for (int i = 0; i < 144; i++) {
+        for (int i = 0; i < 144; i++) {  // 选择起点 一次从 1 到 144
 //            System.out.println("----------------------------第"+i+"个-----------------------------");
-            if (temp[i] != 0) {
-                for (int l = 0; l <peopleNumber -1 ; l++) {//重置tempInFun2
-                    for (int m = 0; m < peopleNumber -1 ; m++) {
+            if (temp[i] != 0) {  //非空座位不能座位起点
+                for (int l = 0; l < peopleNumber - 1; l++) {//重置tempInFun2
+                    for (int m = 0; m < peopleNumber - 1; m++) {
                         tempInFun2[l][m].setUse(true);
                         tempInFun2[l][m].setSitNumber(0);
                         tempInFun2[l][m].setDistance(999); //防止点数过少使得出现空余点距离为0，反复使用
                     }
                 }
 
-                for (int j = 0; j <peopleNumber ; j++) {//重置recommentSit
+                for (int j = 0; j < peopleNumber; j++) {//重置recommentSit
                     recommendSit[j].setDistance(0);
                     recommendSit[j].setSitNumber(0);
                     recommendSit[j].setUse(true);
@@ -219,11 +227,37 @@ public class BFSchoice {
         return result;
     }
 
+
+//    public void toCharArray(List<DiningTable> tables) {
+//        int size = tables.size();
+//        int k = -2;  //桌子行间隔
+//        int L = 0;   //桌子列间隔
+//        for (int i = 0; i < size; i++) {  //创建prototype 座位矩阵
+//            if (i % 8 == 0){
+//                k += 2;  //桌子的行间隔为2
+//                L = 0;
+//            }
+//            for (int j = 0; j < 6; j++) {
+//                if (j < 3)
+//                    prototype[k][(i * 3 + j + L) % 24] = (tables.get(i).getChairs().get(j).getEmpty() == true) ? 1 : 0;
+//
+//                else
+//                    prototype[k + 1][(i * 3 + j - 3 + L) % 24] = (tables.get(i).getChairs().get(j).getEmpty() == true) ? 1 : 0;
+//            }
+//            L++;
+//        }
+//        for (int i = 0; i < 6; i++) {
+//            for (int j = 0; j < 24; j++) {
+////                System.out.print("  " + prototype[i][j]);
+//                temp[i * 24 + j] = prototype[i][j];
+//            }
+
     public void toCharArray(List<DiningTable> tables) {
         int size = tables.size();
         int k = -2;
-        for (int i = 0; i < size; i++) {
-            if (i % 8 == 0) k += 2;
+
+        for (int i = 0; i < size; i++) {  //创建prototype 座位矩阵
+            if (i % 8 == 0) k += 2;  // 0 和 1 为第一排桌子 ，2 和 3 为第二排 ，4 和 5 第三排
             for (int j = 0; j < 6; j++) {
                 if (j < 3)
                     prototype[k][(i * 3 + j) % 24] = (tables.get(i).getChairs().get(j).getEmpty() == true) ? 1 : 0;
@@ -241,16 +275,18 @@ public class BFSchoice {
 //            System.out.println("");
         }
         for (int i = 0; i < 144; i++) {
-            if (temp[i] != 0) {
+            if (temp[i] != 0) { //就是temp[i] == 1 即第i个位置为空 ， 可以坐人
                 for (int j = i; j < 144; j++) {
                     if (i != j && temp[j] != 0)
-                        if (j % 24 > i % 24)
+                        if (j % 24 > i % 24)  // j 虽然一定大于 i ，也就是 j 一定在 i 的下面 ，
+                                              // 但有可能是左下角 也有可能是右下角 ，添加判断是为了防止出现负值
                             Points[i][j].setDistance((difference(j / 24, i / 24)) + (j % 24 - i % 24)); //横向差值 加上纵向差值 注意 横向差值的正负
                         else
+                            //difference 设置桌子行间隔
                             Points[i][j].setDistance((difference(j / 24, i / 24)) + (i % 24 - j % 24));
 
                     else
-                        Points[i][j].setDistance(0);
+                        Points[i][j].setDistance(0); //表示 自身到自身的距离为 0
                     Points[i][j].setLocation(j);
                 }
 
@@ -264,6 +300,15 @@ public class BFSchoice {
                 Points[i][j].setDistance(Points[j][i].getDistance());
                 Points[i][j].setLocation(j);
             }
+        }
+        for (int i = 0; i < 144; i++) {
+            for (int j = 0; j < 144; j++) {
+                if (i<j){
+                    Points[i][j] = Points[j][i];
+                }
+                System.out.printf("%5d + %4d", Points[i][j].getDistance(), Points[i][j].getLocation());
+            }
+            System.out.println();
         }
 
     }
@@ -290,11 +335,11 @@ public class BFSchoice {
         }
     }
 
-    public int difference(int j, int i) {
+    public int difference(int j, int i) {   //控制桌子的行间距为 2
         int res = 0;
         if (j - i == 1) {
-                if (i % 2 == 0) res = 1;
-                if (i % 2 == 1) res = 2;
+            if (i % 2 == 0) res = 1;   // j  一定大于 i  上三角矩阵列值一定大于行值
+            if (i % 2 == 1) res = 2;
         } else if (j - i == 2) {
             res = 3;
         } else if (j - i == 3) {

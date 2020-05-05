@@ -4,15 +4,15 @@ public class AdminLoginResult {
     private String Token;
     private Meta meta;
     private int userId;
-    private String authority;
+    private int authority;
     private String username;
     private String shopename;
 
-    public String getAuthority() {
+    public int getAuthority() {
         return authority;
     }
 
-    public void setAuthority(String authority) {
+    public void setAuthority(int authority) {
         this.authority = authority;
     }
 

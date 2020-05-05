@@ -49,7 +49,7 @@ public class SitSelectServiceImpl implements SitSelectService {
             Chairs = chairMapper.selectAllChairsOne();
             Table = taberMapper.selectAllTableOne();
 //            chairs.addAll((Set<Chair>) redisUtil.keys("Chairs_1*"));
-            System.out.println(chairs.isEmpty());
+//            System.out.println(chairs.isEmpty());
 //            int len = redisUtil.keys("Chairs_1*").size();
             AllSelect = (String[]) redisUtil.keys("Chairs_1*").toArray(new String[redisUtil.keys("Chairs_1*").size()]);
         } else {
@@ -63,7 +63,7 @@ public class SitSelectServiceImpl implements SitSelectService {
         System.out.println(Table.size());
         System.out.println(AllSelect.length);
         int star = 0;
-        for (int i = 0; i < Table.size(); i++) {
+        for (int i = 0; i < Table.size(); i++) {  //分配椅子给对应桌子
             List<Chair> chairList = new ArrayList<>(Chairs.subList(star, star + Table.get(i).getSumnumber()));
             Table.get(i).setChairs(chairList);
             star += Table.get(i).getSumnumber();
@@ -102,13 +102,17 @@ public class SitSelectServiceImpl implements SitSelectService {
      public Boolean selectConfirm(SelectConfirm selectConfirm){
         String allSit = "";
         String allpeoplename = "";
+        StringBuffer stringBuffer = new StringBuffer(allpeoplename);
         for (int i = 0; i < selectConfirm.getAllPeopleName().length; i++) {
             System.out.println(selectConfirm.getAllPeopleName()[i].getName());
-            allpeoplename = allpeoplename +selectConfirm.getAllPeopleName()[i].toString();
+            stringBuffer.append(selectConfirm.getAllPeopleName()[i].getName());
+            if (i<selectConfirm.getAllPeopleName().length-1)
+                stringBuffer.append(" ; ");
+//            allpeoplename = allpeoplename +selectConfirm.getAllPeopleName()[i].toString();
         }
-
+        allpeoplename = stringBuffer.toString();
         System.out.println(allpeoplename);
-        System.out.println(selectConfirm.getAllPeopleName().toString());
+//        System.out.println(selectConfirm.getAllPeopleName().toString());
         RedisSerializer redisSerializer = new StringRedisSerializer();
         redisTemplate.setKeySerializer(redisSerializer);
         RedisUtil redisUtil = new RedisUtil(redisTemplate);
@@ -154,8 +158,8 @@ public class SitSelectServiceImpl implements SitSelectService {
         String str1 = "Chairs_1" + selectConfirm.getUserId();
         String str2 = "Chairs_2" + selectConfirm.getUserId();
         if ("diningtable_1".equals(selectConfirm.getLocation()))
-            redisUtil.set(str1, chairs, 120);
-        else redisUtil.set(str2, chairs, 120);
+            redisUtil.set(str1, chairs, 1200);
+        else redisUtil.set(str2, chairs, 1200);
         return true;
 
     }

@@ -37,18 +37,18 @@ public class AuthorityServiceImpl implements AuthorityService {
         for (int i = 0; i < autoId.length; i++) {  //String转int
             authorityId[i] = Integer.parseInt(autoId[i]);
         }
-        BubbleSort.sort(authorityId);
-        for (int i = 0; i < authorityId.length; i++) {
-            System.out.print(authorityId[i]);
-        }
+        BubbleSort.sort(authorityId);  // 必须先排序
+//        for (int i = 0; i < authorityId.length; i++) {
+//            System.out.print(authorityId[i]);
+//        }
         List<Authority> authoritys = new ArrayList<>();
-        int[] map = new int[10];//映射表，表示主权限的位置
+        int[] map = new int[20];//映射表，表示主权限的位置 限制权限的范围为 100-2000 排序后可有可无
         for (int i = 0; i < map.length; i++) { //初始化
             map[i] = 999;
         }
         int index = 0;//authoritys的索引
         for (int i = 0; i < authorityId.length; i++) {
-            index = strToObjectUtil(authorityId[i],authoritys,index,map,authorityId[i]/100);
+            index = strToObjectUtil(authorityId[i],authoritys,index,map);
         }
         return authoritys;
     }
@@ -64,17 +64,17 @@ public class AuthorityServiceImpl implements AuthorityService {
         for (int i = 0; i < roles.size(); i++) {
             roles.get(i).setAuthorities(this.getAuthority(roles.get(i).getAuthority()));
         }
-        System.out.println(roles.size());
-        System.out.println(query.getPageSize());
+//        System.out.println(roles.size());
+//        System.out.println(query.getPageSize());
         return utils.selectUtil(roles,query);
     }
     @Override
     public List<Authority> getAuthorityList(Integer id){
         if (id != null){
             int auto = adminMapper.getAuthorityById(id);
-            System.out.println(auto);
-            System.out.println(roleMapper.selectAuthorityById(auto));
-            System.out.println(this.getAuthority(roleMapper.selectAuthorityById(auto)));
+//            System.out.println(auto);
+//            System.out.println(roleMapper.selectAuthorityById(auto));
+//            System.out.println(this.getAuthority(roleMapper.selectAuthorityById(auto)));
             return this.getAuthority(roleMapper.selectAuthorityById(auto));
         }
         else return null;
@@ -86,7 +86,7 @@ public class AuthorityServiceImpl implements AuthorityService {
         Role role = roleMapper.selectOneById(rii.getRole().getId());
         int fatherId  = rii.getFatherId();
         int sonId = rii.getSonId();
-        System.out.println(fatherId+"--"+sonId);
+//        System.out.println(fatherId+"--"+sonId);
         List<Authority> authorities = this.getAuthority(role.getAuthority());
 
         for (int i = 0; i < authorities.size(); i++) {
@@ -119,8 +119,8 @@ public class AuthorityServiceImpl implements AuthorityService {
 
             }
         }
-        System.out.println("11111111111111");
-        System.out.println(str);
+//        System.out.println("11111111111111");
+//        System.out.println(str);
         Boolean bool = roleMapper.deleteAuthorityById(role.getId(),str);
         List<Authority> authorities1 = this.getAuthority(str);
         return bool==true?new AuthorityAndMeta(authorities1,new Meta("SUCCESS")):
@@ -146,12 +146,12 @@ public class AuthorityServiceImpl implements AuthorityService {
         int auto = adminMapper.getAuthorityById(id);
         return roleMapper.selectAuthorityById(auto);
     }
-    public int strToObjectUtil(int autoid,List<Authority> authoritys , int index , int[] map ,int i){
+    public int strToObjectUtil(int autoid,List<Authority> authoritys , int index , int[] map){
         if (autoid %100 != 0){
-            authoritys.get(map[6]).getSon().add(authorityMapper.selectAuthorityByAutoId(autoid));
+            authoritys.get(map[autoid /100]).getSon().add(authorityMapper.selectAuthorityByAutoId(autoid));
         }else {
             authoritys.add(authorityMapper.selectAuthorityByAutoId(autoid));
-            map[6] = index;
+            map[autoid /100] = index; //映射表 每次遇到权限头时 放入map
             index++;
         }
         return index;

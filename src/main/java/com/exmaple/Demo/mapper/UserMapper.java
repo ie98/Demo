@@ -4,9 +4,8 @@ import com.exmaple.Demo.dto.RegisterUser;
 import com.exmaple.Demo.model.User;
 import org.apache.ibatis.annotations.*;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.PostMapping;
 
-import javax.servlet.http.Cookie;
+
 import java.util.List;
 
 @Mapper
@@ -40,5 +39,7 @@ public interface UserMapper {
     User selectUserByName(@Param("name") String name);
     @Select("select * from user where username = #{username} and id <> #{id}")
     List<User> selectUserByNameAndId(@Param("username") String name , @Param("id") int id);
+    @Update("update user set password = #{password} where id = #{id}")
+    Boolean updatePassword(@Param("password") String password , @Param("id") int id);
 
 }
