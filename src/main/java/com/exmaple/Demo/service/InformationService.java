@@ -12,6 +12,7 @@ public interface InformationService {
     public QueryReturn selectAllAdmin(Query query);
 
     public QueryReturn selectAllRecord(Query query);
+    public QueryReturn selectAllFoodRecord(Query query ,String shopname);
 
     public QueryReturn selectAllShop(Query query);
     public QueryReturn selectAllFood(Query query);

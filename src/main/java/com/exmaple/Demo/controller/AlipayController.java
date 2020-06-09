@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.RestController;
 import javax.sound.midi.MidiChannel;
 
 @RestController
-@CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://localhost:9000")
 public class AlipayController {
     @Autowired
     private AlipayServiceImpl alipayService;

@@ -7,16 +7,17 @@ import java.util.List;
 
 @Data
 public class Food {
-    private int id;
+    private Integer id;
     private String foodname;
-    private int foodid;
+    private Integer foodid;
     private double price;
-    private int shopid;
+    private Integer shopid;
     private String shopname;
     private String tags;
     private String img;
     private boolean forbid;
     private List<List<Integer>> tagList = new ArrayList<>();
     private List<Tag> tagDetail = new ArrayList<>();
+    private Integer needtime;
 
 }

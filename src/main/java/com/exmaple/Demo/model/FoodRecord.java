@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class FoodRecord {
+    private Integer id;
     private String out_trade_no;
     private String subject;
     private String total_amount;
@@ -21,4 +22,6 @@ public class FoodRecord {
     private String labels;
     private Integer userid;
     private List<Long> dates = new ArrayList<>();
+    private Integer allneedtime;
+    private Boolean dispose;
 }

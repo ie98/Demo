@@ -1,5 +1,9 @@
 package com.exmaple.Demo.controller;
 
+import com.exmaple.Demo.dto.Meta;
+import com.exmaple.Demo.util.Jackson;
+import com.exmaple.Demo.util.Result;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import org.apache.shiro.SecurityUtils;
 import org.apache.shiro.authc.IncorrectCredentialsException;
 import org.apache.shiro.authc.UnknownAccountException;
@@ -7,19 +11,21 @@ import org.apache.shiro.authc.UsernamePasswordToken;
 import org.apache.shiro.subject.Subject;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
-@Controller
-@CrossOrigin("http://localhost:9000")
+@RestController
+//@CrossOrigin("http://localhost:9000")
 public class login1Controller {
-//    @RequestMapping("/naouth")
-////    @ResponseBody
-//    public String naouth(Model model){
-//        System.out.println("naouth");
-//        return "login";
-//    }
+    @GetMapping("/error")
+    public String error() throws JsonProcessingException {
+        System.out.println("45645646545646545646");
+        return Jackson.classtoJson(new Meta("MEIYOUGAIQUANXIAN"));
+    }
+    @GetMapping("/toLogin")
+    public String toLogin() throws JsonProcessingException {
+        System.out.println("45645646545646545646");
+        return Jackson.classtoJson(new Meta("TO_LOGIN"));
+    }
 //    @RequestMapping("/login1")
 ////    @ResponseBody
 //    public String tologin1(Model model){

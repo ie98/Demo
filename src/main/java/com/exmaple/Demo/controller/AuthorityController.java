@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:9001")
+//@CrossOrigin("http://localhost:9001")
 public class AuthorityController {
     @Autowired
     private AuthorityServiceImpl authorityService;

@@ -13,6 +13,15 @@ public class User {
     private String college;
     private String phone;
     private Boolean state;
+    private String realname;
+
+    public String getRealname() {
+        return realname;
+    }
+
+    public void setRealname(String realname) {
+        this.realname = realname;
+    }
 
     public Boolean getState() {
         return state;

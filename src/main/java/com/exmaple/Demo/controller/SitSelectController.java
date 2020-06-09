@@ -29,7 +29,7 @@ import java.util.Date;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://localhost:9000")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class SitSelectController {
     @Autowired
@@ -38,10 +38,10 @@ public class SitSelectController {
     SitSelectServiceImpl sitSelectServiceImpl;
 
     @GetMapping("/inLeft")
-    @RequiresPermissions({"101"})
     public String inLeft() throws JsonProcessingException {
         System.out.println("aaaa");
-        return Jackson.classtoJson(sitSelectServiceImpl.selectAllChair("diningtable_1"));
+        List<DiningTable> list =  sitSelectServiceImpl.selectAllChair("diningtable_1");
+        return Jackson.classtoJson(list);
     }
     @GetMapping("/inRight")
     public String inRight() throws JsonProcessingException {
@@ -49,14 +49,17 @@ public class SitSelectController {
     }
     @PostMapping("/recommendSit")
     public String recommendSit(@RequestBody PeopleNumber peopleNumber) throws JsonProcessingException {
-        for (int i = 0; i < peopleNumber.getAllPeopleName().length; i++) {
-            System.out.println(peopleNumber.getAllPeopleName()[i].getName());
+//        for (int i = 0; i < peopleNumber.getAllPeopleName().length; i++) {
+//            System.out.println(peopleNumber.getAllPeopleName()[i].getName());
+//        }
+        if(sitSelectServiceImpl.tooMany(peopleNumber.getRegion(),peopleNumber.getPeopleNumber())){
+
+            List<DiningTable> list = sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2");
+            List<DiningTable> recommendSit = SelectChairUtil.adjust(list,new BFSchoice().BFS(list, peopleNumber.getPeopleNumber()));
+            return    Jackson.classtoJson( new TablesAndMeta(recommendSit,new Meta("SUCCESS")));
+        }else{
+            return   Jackson.classtoJson( new TablesAndMeta(null,new Meta("PARAM_TO_MANY")));
         }
-        return  sitSelectServiceImpl.tooMany(peopleNumber.getRegion(),peopleNumber.getPeopleNumber())?
-            Jackson.classtoJson( new TablesAndMeta(SelectChairUtil.adjust(sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2"),
-                    new BFSchoice().BFS(sitSelectServiceImpl.selectAllChair(("diningtable_1".equals(peopleNumber.getRegion())) ? "diningtable_1" : "diningtable_2"), peopleNumber.getPeopleNumber())),
-                    new Meta("SUCCESS"))):
-                Jackson.classtoJson( new TablesAndMeta(null,new Meta("PARAM_TO_MANY")));
     }
     @PostMapping("/selectConfirm")
     public String selectConfirm(@RequestBody SelectConfirm selectConfirm) throws JsonProcessingException {

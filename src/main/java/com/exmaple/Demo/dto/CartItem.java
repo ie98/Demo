@@ -13,6 +13,15 @@ public class CartItem {
     private String img;
     private int num;
     private Date date;
+    private Integer needtime;
+
+    public Integer getNeedtime() {
+        return needtime;
+    }
+
+    public void setNeedtime(Integer needtime) {
+        this.needtime = needtime;
+    }
 
     public Date getDate() {
         return date;

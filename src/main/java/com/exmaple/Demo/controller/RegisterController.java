@@ -12,7 +12,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin(origins = {"http://localhost:9000","http://localhost:9001"})
+//@CrossOrigin(origins = {"http://localhost:9000","http://localhost:9001"})
 
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class RegisterController {

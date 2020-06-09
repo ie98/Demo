@@ -30,6 +30,9 @@ public class InformationServiceImpl<T> implements InformationService {
     private ShopMapper shopMapper;
     @Autowired
     private TagMapper tagMapper;
+
+    @Autowired
+    private FoodRecordMapper foodRecordMapper;
     private Utils utils = new Utils();
     @Override
     public QueryReturn selectAllUser(Query query) {
@@ -174,5 +177,14 @@ public class InformationServiceImpl<T> implements InformationService {
             }
         }
         return foods;
+    }
+
+    @Override
+    public QueryReturn selectAllFoodRecord(Query query , String shopname) {
+        System.out.println(shopname);
+        List<FoodRecord> list = foodRecordMapper.selectAllFoodRecordByShopname(shopname);
+        System.out.println(list.size());
+        QueryReturn queryReturn = Utils.selectUtil(list,query);
+        return queryReturn;
     }
 }

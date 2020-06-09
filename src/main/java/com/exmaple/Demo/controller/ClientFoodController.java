@@ -12,7 +12,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://localhost:9000")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class ClientFoodController {
     @Autowired

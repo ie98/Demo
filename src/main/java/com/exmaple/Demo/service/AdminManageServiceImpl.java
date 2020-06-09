@@ -1,5 +1,6 @@
 package com.exmaple.Demo.service;
 
+import com.exmaple.Demo.config.WebSocket;
 import com.exmaple.Demo.constant.ResultCode;
 import com.exmaple.Demo.dto.Meta;
 
@@ -28,6 +29,10 @@ public class AdminManageServiceImpl implements  AdminManageService {
     private FoodMapper foodMapper;
     @Autowired
     private RoleMapper roleMapper;
+    @Autowired
+    private FoodRecordMapper foodRecordMapper;
+    @Autowired
+    private WebSocket webSocket;
     /*----------------------------User--------------------*/
     public Meta deleteUser(int id){
         Boolean bool = userMapper.deleteUser(id);
@@ -194,5 +199,22 @@ public class AdminManageServiceImpl implements  AdminManageService {
             return new Meta("ROLE_HAS_EXISTED");
         }
         return Result.ResuleInfo(roleMapper.UpdateInfo(role.getName(),role.getDetail(),role.getId()),"SUCCESS","ERROR");
+    }
+    //========================foodrecord
+
+    @Override
+    public Meta disposeFoodRecord(Integer id,Integer userid) {
+        System.out.println(id);
+        System.out.println(userid);
+        FoodRecord foodRecord = foodRecordMapper.selectFoodRecordById(id);
+//        webSocket.sendAllMessage("商家已经完成订单!!");
+        webSocket.sendTextMessage(userid.toString(),id.toString());
+        return new Meta("SUCCESS");
+    }
+    @Override
+    public Meta confirmDisposeFoodRecord(Integer id) {
+        System.out.println(id);
+        return Result.ResuleInfo(foodRecordMapper.disposeFoodRecord(id));
+
     }
 }

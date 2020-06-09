@@ -15,17 +15,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://localhost:9000")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class CartController {
     @Autowired
     CartServiceImpl cartService;
     @PostMapping("/addCart")
-    public String addCart(@RequestBody Cart cart ){
-        System.out.println(cart.getCart().getFoodname());
-       cartService.addCart(cart);
-
-        return null;
+    public String addCart(@RequestBody Cart cart ) throws JsonProcessingException {
+        return Jackson.classtoJson(cartService.addCart(cart));
     }
 
 

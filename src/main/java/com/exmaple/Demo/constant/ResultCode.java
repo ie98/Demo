@@ -27,7 +27,8 @@ PARAM_TO_MANY(10005, "请求参数过大"),
     NO_P_LABEL(10013, "没有找到父级标签"),
     TAGNAME_ISEXIT(10014, "标签名已经存在"),
 
-
+    MEIYOUGAIQUANXIAN(10015, "您没有该权限！！！"),
+    TO_LOGIN(10016, "您尚未登录，将跳转至登录界面！！！"),
     /* 用户错误：20001-29999*/
     USER_NOT_LOGGED_IN(20001, "用户未登录"),
     USER_LOGIN_ERROR(20002, "账号或密码错误"),

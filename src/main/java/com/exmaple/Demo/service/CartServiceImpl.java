@@ -24,7 +24,7 @@ public class CartServiceImpl implements CartService {
     @Autowired
     private RedisTemplate<String, Object> redisTemplate;
     @Override
-    public void addCart(Cart cart) {
+    public Meta addCart(Cart cart) {
         RedisUtil redisUtil = new RedisUtil(redisTemplate);
 
         String str = "Cart_"+cart.getId();
@@ -42,6 +42,7 @@ public class CartServiceImpl implements CartService {
             redisCart.setId(cart.getId());
             redisUtil.set(str, redisCart);
         }
+        return new Meta("SUCCESS");
 
     }
 

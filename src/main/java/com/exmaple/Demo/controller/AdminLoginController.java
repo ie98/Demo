@@ -12,16 +12,27 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 @RestController
-@CrossOrigin("http://localhost:9001")
-//@CrossOrigin("http://30j75285x8.qicp.vip")
+//@CrossOrigin("http://localhost:9001")
+
 public class AdminLoginController {
 
     @Autowired
     private AdminLoginServiceImpl adminLoginService;
+    /**
+     * @Description adminLogin
+     * @Author 411头目
+     * @Date 2020/5/25 21:29
+     * Param [admin]
+     * Return java.lang.String
+     **/
     @PostMapping("/adminLogin")
-    public String adminLogin(@RequestBody Admin admin ) throws JsonProcessingException {
+    public String adminLogin(@RequestBody Admin admin , HttpSession session) throws JsonProcessingException {
+        if (adminLoginService.loginCheck(admin).getMeta().getStatus() == 0){
+            session.setAttribute("user",admin);
+        }
         return new ObjectMapper().writeValueAsString(adminLoginService.loginCheck(admin));
     }
 }

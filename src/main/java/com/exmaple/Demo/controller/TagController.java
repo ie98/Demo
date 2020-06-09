@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @RestController
-@CrossOrigin("*")
+//@CrossOrigin(origins = {"http://localhost:9000","http://localhost:9001"})
 public class TagController {
         @Autowired
         private TagServiceImpl labelService;

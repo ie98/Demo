@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("ct")
-@CrossOrigin("http://localhost:9000")
+//@CrossOrigin("http://localhost:9000")
 public class caseController {
 
     @GetMapping("/first")

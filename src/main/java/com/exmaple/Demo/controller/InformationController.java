@@ -13,7 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@CrossOrigin("http://localhost:9001")
+//@CrossOrigin("http://localhost:9001")
 //@CrossOrigin("http://30j75285x8.qicp.vip")
 public class InformationController {
     @Autowired
@@ -84,6 +84,10 @@ public class InformationController {
     @PostMapping("selectAllFoodNotQuery")
     public String selectAllFoodNotQuery() throws JsonProcessingException {
        return Jackson.classtoJson(informationService.selectAllFoodNotQuery()) ;
+    }
+    @PostMapping("selectAllFoodRecord/{query}")
+    public String selectAllFoodRecord(@PathVariable("query") String shopname,@RequestBody Query query) throws JsonProcessingException {
+        return Jackson.classtoJson(informationService.selectAllFoodRecord(query,shopname)) ;
     }
 
 

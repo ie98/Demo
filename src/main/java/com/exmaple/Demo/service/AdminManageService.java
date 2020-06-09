@@ -6,6 +6,7 @@ import com.exmaple.Demo.dto.RemarksAndId;
 import com.exmaple.Demo.model.*;
 import org.springframework.web.multipart.MultipartFile;
 
+
 import java.io.IOException;
 
 public interface AdminManageService {
@@ -26,6 +27,7 @@ public interface AdminManageService {
     public Meta deleteRole(int id);
     public Meta addRole(Role role );
     public Meta editRole(Role role);
-
+    public Meta disposeFoodRecord(Integer id , Integer userid);
+    public Meta confirmDisposeFoodRecord(Integer id);
 
 }

@@ -56,7 +56,7 @@ public class SitSelectServiceImpl implements SitSelectService {
             Chairs = chairMapper.selectAllChairsTwo();
             Table = taberMapper.selectAllTableTwo();
 
-            AllSelect = (String[]) redisUtil.keys("Chairs_2*").toArray(new String[redisUtil.keys("Chairs_2*").size()]);
+            AllSelect = (String[]) redisUtil.keys("Chairs_2*").toArray(new String[redisUtil.keys("Chairs_2*").size()]);  //获取已经预选过的座位对应key值
 
         }
 
